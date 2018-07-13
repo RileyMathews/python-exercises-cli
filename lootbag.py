@@ -1,8 +1,12 @@
+from uuid import uuid4
+from sys import argv
+
 
 class LootBag:
 
-    def add_child(self):
-        return True
+    def _add_child(self, name):
+        with open("children.txt", "a") as children:
+            children.write(name)
 
     def add_loot(self):
         return True
@@ -15,3 +19,6 @@ class LootBag:
 
     def get_childs_loot(self):
         return True
+
+bag = LootBag()
+bag._add_child("bob")
