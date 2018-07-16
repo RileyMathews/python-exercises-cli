@@ -5,10 +5,11 @@ from sys import argv
 class LootBag:
 
     def _add_child(self, name):
+        entry = f'{uuid4()},{name}'
         with open("children.txt", "a") as children:
-            children.write(name)
+            children.write(entry)
 
-    def add_loot(self):
+    def add_loot(self, toy, child):
         return True
 
     def remove_loot(self):
@@ -19,6 +20,3 @@ class LootBag:
 
     def get_childs_loot(self):
         return True
-
-bag = LootBag()
-bag._add_child("bob")
