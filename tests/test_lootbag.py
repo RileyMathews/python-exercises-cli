@@ -22,7 +22,7 @@ class LootbagTest(unittest.TestCase):
             t = target_file.read()
             target_file.seek(0)
             for line in t.split('\n'):
-                if line.split(',')[1] != item:
+                if item not in line:
                     target_file.write(line + '\n')
             target_file.truncate()
 
@@ -32,8 +32,12 @@ class LootbagTest(unittest.TestCase):
 
     def test_childrens_toys_can_be_added_to_bag(self):
         self.bag.add_loot("test_toy", "test_child")
-        with open('children.txt', 'r+') as children:
+        with open('children.txt', 'r') as children:
             self.assertTrue("test_child" in children.read())
+        with open('toys.txt', 'r') as toys:
+            self.assertTrue('test_toy' in toys.read())
+        self.clean_up_files('children.txt', 'test_child')
+        self.clean_up_files('toys.txt', 'test_toy')
 
     def test_children_can_be_added_to_bag(self):
         """method to test that a child can be added to the database
